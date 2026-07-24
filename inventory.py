@@ -1,6 +1,6 @@
 from datetime import date
 
-import db
+import database as db
 
 CROP_COLUMNS = ("name", "planting_date", "harvest_date", "status", "quantity_planted")
 
