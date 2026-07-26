@@ -1,9 +1,17 @@
+
+# Each function follows the same pattern: ASK the farmer for input 
+#(using menu.py's helpers), CALL a method on the Inventory object
+#(which handles the database), then SHOW the result. 
+#No SQL lives in this file - all database work happens inside inventory.py. This file only ever talks to the Inventory object
+
+
 import menu
 from crop import Crop
 from sales import Sale
 from inventory import OversoldError
 
 
+# Menu option 1: View inventory.
 def view_inventory(inventory):
     crops = inventory.all_crops()
     if not crops:
@@ -14,7 +22,7 @@ def view_inventory(inventory):
         crop = Crop.from_row(row)
         print(crop)
 
-
+#  Menu option 2: Add crop.
 def add_crop(inventory):
     name = menu.get_text("Crop name: ")
     planting_date = menu.get_text("Planting date (YYYY-MM-DD): ")
@@ -25,7 +33,7 @@ def add_crop(inventory):
     new_id = inventory.add(name, planting_date, harvest_date, status, quantity)
     print(f"Crop added successfully. Assigned ID: {new_id}")
 
-
+#  Menu option 3: Update crop.
 def update_crop(inventory):
     crop_id = int(menu.get_number("Enter the crop ID to update: "))
     row = inventory.find(crop_id)
@@ -51,7 +59,7 @@ def update_crop(inventory):
     inventory.update_field(crop_id, column, new_value)
     print("Crop updated successfully.")
 
-
+#  Menu option 4: Record sale.
 def record_sale(inventory):
     crop_id = int(menu.get_number("Enter the crop ID to sell: "))
     row = inventory.find(crop_id)
@@ -70,7 +78,7 @@ def record_sale(inventory):
     except ValueError as e:
         print(f"Error: {e}")
 
-
+#   Menu option 5: Calculate remaining stock.
 def calculate_stock(inventory):
     report = inventory.stock_report()
     if not report:
