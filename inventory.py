@@ -66,6 +66,8 @@ class Inventory:
         crop = self.find(crop_id)
         if crop is None:
             raise ValueError(f"No crop with ID {crop_id}")
+        if quantity_sold <= 0:
+            raise ValueError("Quantity sold must be greater than zero.")
         remaining = self.remaining(crop_id)
         if quantity_sold > remaining:
             raise OversoldError(crop["name"], remaining)
