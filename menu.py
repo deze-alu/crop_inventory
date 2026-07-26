@@ -1,4 +1,3 @@
-
 def show_menu(title, options):
 
     while True:
@@ -42,17 +41,3 @@ def get_number(prompt):
             return number
         except ValueError:
             print("That's not a number, please try again.")
-
-# It lets you test the three functions on their own, without the
-# rest of the program.
-if __name__ == "__main__":
-    options = {"1": "Say hello", "2": "Say goodbye", "0": "Exit"}
-
-    choice = show_menu("DEMO MENU", options)
-    print("You chose:", choice)
-
-    name = get_text("Enter your name: ")
-    print("Hello,", name)
-
-    quantity = get_number("Enter a quantity: ")
-    print("You entered:", quantity)
