@@ -70,3 +70,12 @@ def record_sale(inventory):
     except ValueError as e:
         print(f"Error: {e}")
 
+
+def calculate_stock(inventory):
+    report = inventory.stock_report()
+    if not report:
+        print("No crops recorded yet.")
+        return
+    print("\nID | Name | Planted | Sold | Remaining")
+    for row in report:
+        print(f"{row['crop_id']} | {row['name']} | {row['quantity_planted']} | {row['sold']} | {row['remaining']}")
