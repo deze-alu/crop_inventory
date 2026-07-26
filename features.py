@@ -51,3 +51,22 @@ def update_crop(inventory):
     inventory.update_field(crop_id, column, new_value)
     print("Crop updated successfully.")
 
+
+def record_sale(inventory):
+    crop_id = int(menu.get_number("Enter the crop ID to sell: "))
+    row = inventory.find(crop_id)
+    if row is None:
+        print(f"No crop found with ID {crop_id}.")
+        return
+
+    print(f"Remaining stock: {inventory.remaining(crop_id)}")
+    quantity_sold = menu.get_number("Quantity sold: ")
+
+    try:
+        sale = inventory.record_sale(crop_id, quantity_sold)
+        print(f"Sale recorded. Sale ID: {sale['sale_id']}")
+    except OversoldError as e:
+        print(f"Cannot complete sale: {e}")
+    except ValueError as e:
+        print(f"Error: {e}")
+
