@@ -7,7 +7,7 @@
 
 import menu
 from crop import Crop
-from sales import Sale
+from sale import Sale
 from inventory import OversoldError
 
 
