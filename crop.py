@@ -3,7 +3,7 @@
 
 
 class Crop:
-    """Represents a crop in the inventory."""
+    """Represents a crop in the inventory system."""
 
     def __init__(self, crop_id, name, planting_date, harvest_date,
                  status, quantity_planted):
@@ -16,16 +16,18 @@ class Crop:
 
     @classmethod
     def from_row(cls, row):
+        """Creates a Crop object from a database row dictionary."""
         return cls(
-            row[0],
-            row[1],
-            row[2],
-            row[3],
-            row[4],
-            row[5]
+            row["crop_id"],
+            row["name"],
+            row["planting_date"],
+            row["harvest_date"],
+            row["status"],
+            row["quantity_planted"]
         )
 
     def __str__(self):
+        """Returns a readable string representation of the crop."""
         return "{} | {} | {} | {} | {} | {}".format(
             self.crop_id,
             self.name,
