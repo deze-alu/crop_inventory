@@ -25,3 +25,29 @@ def add_crop(inventory):
     new_id = inventory.add(name, planting_date, harvest_date, status, quantity)
     print(f"Crop added successfully. Assigned ID: {new_id}")
 
+
+def update_crop(inventory):
+    crop_id = int(menu.get_number("Enter the crop ID to update: "))
+    row = inventory.find(crop_id)
+    if row is None:
+        print(f"No crop found with ID {crop_id}.")
+        return
+
+    crop = Crop.from_row(row)
+    print("Current details:")
+    print(crop)
+
+    field_options = {
+        "1": "name", "2": "planting_date", "3": "harvest_date",
+        "4": "status", "5": "quantity_planted", "0": "Cancel",
+    }
+    choice = menu.show_menu("UPDATE WHICH FIELD?", field_options)
+    if choice == "0":
+        print("Update cancelled.")
+        return
+
+    column = field_options[choice]
+    new_value = menu.get_text(f"New value for {column}: ")
+    inventory.update_field(crop_id, column, new_value)
+    print("Crop updated successfully.")
+
