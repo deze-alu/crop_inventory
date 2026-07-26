@@ -13,14 +13,16 @@ class Sale:
 
     @classmethod
     def from_row(cls, row):
+        """Creates a Sale object from a database row dictionary."""
         return cls(
-            row[0],
-            row[1],
-            row[2],
-            row[3]
+            row["sale_id"],
+            row["crop_id"],
+            row["quantity_sold"],
+            row["sale_date"]
         )
 
     def __str__(self):
+        """Returns a readable string representation of the sale."""
         return "{} | {} | {} | {}".format(
             self.sale_id,
             self.crop_id,
